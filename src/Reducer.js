@@ -7,8 +7,9 @@ export const initialState = {
 //Selector
 
 export const getBasketTotal = (basket) => {
-    return(basket?.reduce((amount, item) => item.price + amount, 0).toFixed(2));
-}
+    const total = Number((basket?.reduce((amount, item) => item.price + amount, 0).toFixed(2)));
+    return total.toLocaleString();
+};
 
 const reducer = (state, action) => {
     switch(action.type) {
