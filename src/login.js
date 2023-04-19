@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Login.css';
 import { Link, useNavigate } from "react-router-dom";
 import StorefrontIcon from '@material-ui/icons/Storefront';
-import { auth } from "./firebase";
+import { auth } from "./firebase.js";
 
 function Login() {
     const navigate = useNavigate();
@@ -11,9 +11,8 @@ function Login() {
 
     const signIn = e => {
         e.preventDefault();
-
         auth
-            .signInWithEmailAndPassword(email, password)
+        .signInWithEmailAndPassword(email, password)
             .then(auth => {
                 navigate('/');
             })
@@ -23,13 +22,11 @@ function Login() {
 
     const register = e => {
         e.preventDefault();
-
         auth
-            .createUserWithEmailAndPassword(email, password)
-            .then((auth) => {
-                if (auth) {
-                    navigate('/');
-                }
+        .createUserWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+                console.log(userCredential);
+                navigate('/');
             })
             .catch(error => alert(error.message))
 
